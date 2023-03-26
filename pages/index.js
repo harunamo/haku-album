@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { getAllProps } from "../lib/retriever";
 import HakuCard from "../components/HakuCard";
 import {
   createStyles,
@@ -99,70 +100,10 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const haku_props = [
-  {
-    prop_id: 1,
-    place: "静岡",
-    description: "シャンプーしよう",
-    image_path: "/haku1.jpeg",
-  },
-  {
-    prop_id: 2,
-    place: "吉田",
-    description: "アルパカみたい",
-    image_path: "/haku2.jpeg",
-  },
-  {
-    prop_id: 3,
-    place: "静岡",
-    description: "川遊び",
-    image_path: "/haku3.jpeg",
-  },
-  {
-    prop_id: 4,
-    place: "伊豆",
-    description: "雨の日のお出かけ",
-    image_path: "/haku4.jpeg",
-  },
-  {
-    prop_id: 5,
-    place: "吉田",
-    description: "チューリップが綺麗だね",
-    image_path: "/haku5.jpeg",
-  },
-  {
-    prop_id: 6,
-    place: "藤枝",
-    description: "鯉のぼり",
-    image_path: "/haku6.jpeg",
-  },
-  {
-    prop_id: 7,
-    place: "焼津",
-    description: "水辺が好き",
-    image_path: "/haku7.jpeg",
-  },
-  {
-    prop_id: 8,
-    place: "静岡",
-    description: "散歩は楽しいね",
-    image_path: "/haku8.jpeg",
-  },
-  {
-    prop_id: 9,
-    place: "伊豆",
-    description: "ボールを追いかける",
-    image_path: "/haku9.jpeg",
-  },
-];
-
 export default function Home() {
   const { classes } = useStyles();
   let haku_cards = [];
-
-  for (let i in haku_props) {
-    haku_cards.push(<HakuCard key={haku_props[i].prop_id} prop={haku_props[i]}></HakuCard>);
-  }
+  let haku_props = getAllProps();
 
   return (
     <div>
@@ -221,7 +162,7 @@ export default function Home() {
         </Container>
       </div>
 
-      <Grid className="mt-20 mx-10">{haku_cards}</Grid>
+      <Grid className="mt-20 mx-10">{haku_props.map((haku_prop) => <HakuCard key={haku_prop.prop_id} prop={haku_prop}></HakuCard>)}</Grid>
 
       <div className={classes.footer}>
         <Container className={classes.footerInner}>
