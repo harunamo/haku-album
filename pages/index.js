@@ -3,11 +3,7 @@ import HakuCard from "../components/HakuCard";
 import {
   createStyles,
   Container,
-  Image,
   Text,
-  Badge,
-  Group,
-  Box,
   rem,
   Grid,
 } from "@mantine/core";
@@ -105,14 +101,69 @@ const useStyles = createStyles((theme) => ({
 
 const haku_props = [
   {
+    prop_id: 1,
     place: "静岡",
     description: "シャンプーしよう",
     image_path: "/haku1.jpeg",
+  },
+  {
+    prop_id: 2,
+    place: "吉田",
+    description: "アルパカみたい",
+    image_path: "/haku2.jpeg",
+  },
+  {
+    prop_id: 3,
+    place: "静岡",
+    description: "川遊び",
+    image_path: "/haku3.jpeg",
+  },
+  {
+    prop_id: 4,
+    place: "伊豆",
+    description: "雨の日のお出かけ",
+    image_path: "/haku4.jpeg",
+  },
+  {
+    prop_id: 5,
+    place: "吉田",
+    description: "チューリップが綺麗だね",
+    image_path: "/haku5.jpeg",
+  },
+  {
+    prop_id: 6,
+    place: "藤枝",
+    description: "鯉のぼり",
+    image_path: "/haku6.jpeg",
+  },
+  {
+    prop_id: 7,
+    place: "焼津",
+    description: "水辺が好き",
+    image_path: "/haku7.jpeg",
+  },
+  {
+    prop_id: 8,
+    place: "静岡",
+    description: "散歩は楽しいね",
+    image_path: "/haku8.jpeg",
+  },
+  {
+    prop_id: 9,
+    place: "伊豆",
+    description: "ボールを追いかける",
+    image_path: "/haku9.jpeg",
   },
 ];
 
 export default function Home() {
   const { classes } = useStyles();
+  let haku_cards = [];
+
+  for (let i in haku_props) {
+    haku_cards.push(<HakuCard key={haku_props[i].prop_id} prop={haku_props[i]}></HakuCard>);
+  }
+
   return (
     <div>
       <div className={classes.wrapper}>
@@ -170,90 +221,7 @@ export default function Home() {
         </Container>
       </div>
 
-      <Grid className="mt-20 mx-10">
-        <Box maw={400} mx="auto">
-          <Image radius="md" src={"/haku1.jpeg"} alt="Haku1" />
-          <Group position="left" mt="md" mb="xs">
-            <Badge color="blue" variant="outline" size="md">
-              静岡
-            </Badge>
-            <Text weight={400}>シャンプーしよう</Text>
-          </Group>
-        </Box>
-        <Box maw={400} mx="auto">
-          <Image radius="md" src={"/haku2.jpeg"} alt="Haku1" />
-          <Group position="left" mt="md" mb="xs">
-            <Badge color="blue" variant="outline" size="md">
-              吉田
-            </Badge>
-            <Text weight={400}>アルパカみたい</Text>
-          </Group>
-        </Box>
-        <Box maw={400} mx="auto">
-          <Image radius="md" src={"/haku3.jpeg"} alt="Haku1" />
-          <Group position="left" mt="md" mb="xs">
-            <Badge color="blue" variant="outline" size="md">
-              静岡
-            </Badge>
-            <Text weight={400}>川遊び</Text>
-          </Group>
-        </Box>
-        <Box maw={400} mx="auto">
-          <Image radius="md" src={"/haku4.jpeg"} alt="Haku1" />
-          <Group position="left" mt="md" mb="xs">
-            <Badge color="blue" variant="outline" size="md">
-              伊豆
-            </Badge>
-            <Text weight={400}>雨の日のお出かけ</Text>
-          </Group>
-        </Box>
-        <Box maw={400} mx="auto">
-          <Image radius="md" src={"/haku5.jpeg"} alt="Haku1" />
-          <Group position="left" mt="md" mb="xs">
-            <Badge color="blue" variant="outline" size="md">
-              吉田
-            </Badge>
-            <Text weight={400}>チューリップが綺麗だね</Text>
-          </Group>
-        </Box>
-        <Box maw={400} mx="auto">
-          <Image radius="md" src={"/haku6.jpeg"} alt="Haku1" />
-          <Group position="left" mt="md" mb="xs">
-            <Badge color="blue" variant="outline" size="md">
-              藤枝
-            </Badge>
-            <Text weight={400}>鯉のぼり</Text>
-          </Group>
-        </Box>
-        <Box maw={400} mx="auto">
-          <Image radius="md" src={"/haku7.jpeg"} alt="Haku1" />
-          <Group position="left" mt="md" mb="xs">
-            <Badge color="blue" variant="outline" size="md">
-              焼津
-            </Badge>
-            <Text weight={400}>水辺が好き</Text>
-          </Group>
-        </Box>
-        <Box maw={400} mx="auto">
-          <Image radius="md" src={"/haku8.jpeg"} alt="Haku1" />
-          <Group position="left" mt="md" mb="xs">
-            <Badge color="blue" variant="outline" size="md">
-              静岡
-            </Badge>
-            <Text weight={400}>散歩は楽しいね</Text>
-          </Group>
-        </Box>
-        <Box maw={400} mx="auto">
-          <Image radius="md" src={"/haku9.jpeg"} alt="Haku1" />
-          <Group position="left" mt="md" mb="xs">
-            <Badge color="blue" variant="outline" size="md">
-              伊豆
-            </Badge>
-            <Text weight={400}>ボールを追いかける</Text>
-          </Group>
-        </Box>
-        <HakuCard props={haku_props[0]}></HakuCard>
-      </Grid>
+      <Grid className="mt-20 mx-10">{haku_cards}</Grid>
 
       <div className={classes.footer}>
         <Container className={classes.footerInner}>
