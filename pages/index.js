@@ -1,4 +1,5 @@
 import Head from "next/head";
+import HakuCard from "../components/HakuCard";
 import {
   createStyles,
   Container,
@@ -101,6 +102,14 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
+
+const haku_props = [
+  {
+    place: "静岡",
+    description: "シャンプーしよう",
+    image_path: "/haku1.jpeg",
+  },
+];
 
 export default function Home() {
   const { classes } = useStyles();
@@ -243,6 +252,7 @@ export default function Home() {
             <Text weight={400}>ボールを追いかける</Text>
           </Group>
         </Box>
+        <HakuCard props={haku_props[0]}></HakuCard>
       </Grid>
 
       <div className={classes.footer}>
