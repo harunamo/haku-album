@@ -1,13 +1,8 @@
-import Head from "next/head";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { getAllProps } from "../lib/retriever";
 import HakuCard from "../components/HakuCard";
-import {
-  createStyles,
-  Container,
-  Text,
-  rem,
-  Grid,
-} from "@mantine/core";
+import { createStyles, Container, Text, rem, Grid } from "@mantine/core";
 const useStyles = createStyles((theme) => ({
   wrapper: {
     position: "relative",
@@ -102,8 +97,24 @@ const useStyles = createStyles((theme) => ({
 
 export default function Home() {
   const { classes } = useStyles();
-  let haku_cards = [];
-  let haku_props = getAllProps();
+  const initial_haku_props = getAllProps();
+  const [haku_props, setHakuProps] = useState(initial_haku_props);
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (form_input) => {
+    let _haku_props = [];
+    if (form_input.place === "全部") {
+      setHakuProps(initial_haku_props);
+    } else {
+      initial_haku_props.map((haku_prop) => {
+        if (haku_prop.place === form_input.place) {
+          _haku_props.push(haku_prop);
+        }
+      });
+      setHakuProps(_haku_props);
+    }
+  };
 
   return (
     <div>
@@ -119,7 +130,7 @@ export default function Home() {
             はくは色々な場所を訪れました。
           </Text>
 
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <label
               htmlFor="search"
               className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -147,8 +158,9 @@ export default function Home() {
               <input
                 type="search"
                 id="search"
+                {...register("place")}
                 className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
-                placeholder="場所（静岡、伊豆、吉田、焼津、藤枝から選んでください。）"
+                placeholder="場所（全部、静岡、伊豆、吉田、焼津、藤枝から選んでください。）"
                 required
               />
               <button
@@ -162,7 +174,11 @@ export default function Home() {
         </Container>
       </div>
 
-      <Grid className="mt-20 mx-10">{haku_props.map((haku_prop) => <HakuCard key={haku_prop.prop_id} prop={haku_prop}></HakuCard>)}</Grid>
+      <Grid className="mt-20 mx-10">
+        {haku_props.map((haku_prop) => (
+          <HakuCard key={haku_prop.prop_id} prop={haku_prop}></HakuCard>
+        ))}
+      </Grid>
 
       <div className={classes.footer}>
         <Container className={classes.footerInner}>
