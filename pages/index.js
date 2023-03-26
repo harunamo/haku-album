@@ -127,7 +127,7 @@ export default function Home() {
           </h1>
 
           <Text className={classes.description} color="white">
-            はくは色々な場所を訪れました。
+            はくとの大切な思い出を集めました。
           </Text>
 
           <form onSubmit={handleSubmit(onSubmit)}>
